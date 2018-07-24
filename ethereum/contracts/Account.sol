@@ -8,7 +8,7 @@ contract AccountFactory {
         deployedAccounts.push(newAccount);
     }
 
-    function getdeployedAccounts() public view returns (address[]) {
+    function getDeployedAccounts() public view returns (address[]) {
         return deployedAccounts;
     }
 }

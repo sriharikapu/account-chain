@@ -20,28 +20,43 @@ beforeEach(async () => {
     .send({ from: accounts[0], gas: '1000000' });
     // console.log("accounts :"+accounts);
     // console.log("factory: "+factory.methods.getDeployedAccounts());
-  /*await factory.methods.createAccount('100').send({
+ 	await factory.methods.createAccount('100').send({
     from: accounts[0],
     gas: '1000000'
-  });
+  	});
 
   [accountAddress] = await factory.methods.getDeployedAccounts().call();
   account = await new web3.eth.Contract(
     JSON.parse(compiledAccount.interface),
     accountAddress
-  );*/
+  );
 });
 
 describe('Accounts', () => {
-// console.log("factory:"+factory);
+	console.log("factory:"+factory);
 	it('deploys a factory and a account', () => {
 	  assert.ok(factory.options.address);
-	  // assert.ok(account.options.address);
+	  assert.ok(account.options.address);
 	});
 
-	/*it('marks caller as the account owner', async () => {
+	it('marks caller as the account owner', async () => {
 	  const owner = await account.methods.owner().call();
 	  assert.equal(accounts[0], owner);
-	});*/
+	});
 
+	it('user can contribute and verify his contribution', async () => {
+	  await account.methods.contribute().send({
+	     value: '200',
+	     from: accounts[1]
+	   });  
+
+	  var ret = await account.methods.contributers(accounts[1]).call();
+	  
+	   // var ret = await account.methods.getMyContribution().send({
+	   // 	gas: '1000000',
+	   // 	from: accounts[1]
+	   // }); 
+	   // console.log(ret[0] + ' ' + ret[1]);
+	  assert.equal(ret, '200');
+	});
 });
