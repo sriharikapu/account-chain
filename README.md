@@ -11,4 +11,4 @@ cd ethereum
 
 node compile.js
 
--- you will find Account.json and AccountFactory.json in the build fold
+-- you will find Account.json and AccountFactory.json in the build folder  
