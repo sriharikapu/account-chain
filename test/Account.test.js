@@ -30,6 +30,7 @@ beforeEach(async () => {
     JSON.parse(compiledAccount.interface),
     accountAddress
   );
+  
 });
 
 describe('Accounts', () => {
@@ -46,17 +47,25 @@ describe('Accounts', () => {
 
 	it('user can contribute and verify his contribution', async () => {
 	  await account.methods.contribute().send({
-	     value: '200',
+	     value: '300',
 	     from: accounts[1]
-	   });  
+	   }); 
 
-	  var ret = await account.methods.contributers(accounts[1]).call();
-	  
-	   // var ret = await account.methods.getMyContribution().send({
-	   // 	gas: '1000000',
-	   // 	from: accounts[1]
-	   // }); 
+	   await account.methods.contribute().send({
+	      value: '300',
+	      from: accounts[1]
+	    });
+
+	   var ret = await account.methods.contributers(accounts[1]).call();
+	   let ret_summary = await account.methods.getSummary().call();
+	   console.log(ret_summary);
+	   // var ret = await account.methods.getMyContribution().call();
+	   	
+	   console.log(ret);
+	   console.log(parseInt(ret_summary[1]));
+	   console.log("your contribution is % : " + (ret / parseInt(ret_summary[1])) * 100);
 	   // console.log(ret[0] + ' ' + ret[1]);
-	  assert.equal(ret, '200');
+	   // console.log(ret);
+	  // assert.equal(ret, '300');
 	});
 });

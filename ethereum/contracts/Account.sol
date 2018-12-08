@@ -35,7 +35,7 @@ contract Account {
     function contribute() public payable {
         require(msg.value > minimumContribution);
         totalContribution += msg.value;
-        contributers[msg.sender] = msg.value;
+        contributers[msg.sender] += msg.value;
     }
 
     function getMyContribution() public view returns (uint, uint) {

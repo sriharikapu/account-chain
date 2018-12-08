@@ -25,5 +25,6 @@ npm run dev
  npm install -g now
  npm run build
  npm run start
+ now
  now alias https://accountchain-bwmtczpvun.now.sh account-chain
-
+now alias https://accountchain-alnukdxzdg.now.sh account-chain
